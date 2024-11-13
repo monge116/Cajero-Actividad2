@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cuentas.modelo.dao.CuentaDao;
+import cuentas.modelo.dao.MovimientoDao;
 import cuentas.modelo.entities.Cuenta;
 import jakarta.servlet.http.HttpSession;
 
@@ -18,6 +19,8 @@ public class HomeController {
 	@Autowired
 	private CuentaDao cdao;
 	
+	@Autowired
+	private MovimientoDao mdao;
 	
 	@GetMapping("/login")
 	public String mostrarLogin() {
@@ -28,7 +31,7 @@ public class HomeController {
 	public String procesarLogin(@RequestParam int idCuenta, HttpSession sesion, RedirectAttributes ratt) {
 		Cuenta cuenta = cdao.findById(idCuenta);
 		if(cuenta != null) { 
-			sesion.setAttribute("usuario", idCuenta);
+			sesion.setAttribute("cuenta", cuenta);
 			// ratt.addFlashAttribute("usuario2", usuario.getNombre());
 			return "redirect:/cuenta";
 		}else {
@@ -43,8 +46,9 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("cuenta")
+	@GetMapping("/cuenta")
 	public String cuenta(Model model) {
+		model.addAttribute("movimiento", mdao.findAll());
 		return "cuenta";
 	}
 	

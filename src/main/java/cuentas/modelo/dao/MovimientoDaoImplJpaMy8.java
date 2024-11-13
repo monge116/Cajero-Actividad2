@@ -2,11 +2,17 @@ package cuentas.modelo.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
+
 import cuentas.modelo.entities.Movimiento;
 import cuentas.modelo.repository.MovimientoRepository;
 
+@Repository
 public class MovimientoDaoImplJpaMy8 implements MovimientoDao{
 	
+	@Autowired
 	private MovimientoRepository mrepo;
 	
 	@Override
