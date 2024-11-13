@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>RRM Bank</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"  crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+	<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom sticky-top bg-white">
+      <a  href="/" class="d-flex col-md-3  text-dark text-decoration-none">
+  		<i class="fa-solid fa-building-columns fa-3x mx-3"></i>
+  		<h1 style="font-family: Roboto Slab;
+ 					font-optical-sizing: auto;
+  					font-weight: 700;
+  					font-style: normal;">
+  	RRM Bank</h1>
+	</a>
+	
+	
+	
+
+      <div class="col-md-3 text-end">
+        <button  type="button" class=" shadow p-2 bg-body rounded"> <a th:href="@{/login}" style="text-decoration:none; color: black"> Acceso</a>  </button>
+      </div>
+    </header>
+    
+    </div>
+    
+    <section class="container bg-light d-flex justify-content-around">
+    
+	<div class="p-5">
+		<div>
+			<h2>Accede a tu cuenta online</h2>
+			<div class="d-flex fs-5 text">
+				<span>Esta web es un <a href="#" class="text-decoration-none">entorno seguro</a></span>
+			</div>
+		</div>
+		
+		
+		<div class="mt-4" style="width: 25rem;">
+            <div class="card-body">
+                <span class="card-title fs-4  mb-4 ">Introduce el codigo de la cuenta</span>
+                <!-- el form -->
+                <form th:action="@{/login}" method="post" id="siginForm">
+                    
+                   
+                   
+                    <!-- Nombre -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><div><i class="fas fa-lock"></i></div></span>
+                        </div>
+                        <input name="idCuenta" type="text" class="form-control" placeholder="Pin" aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="text-danger" id="siginUserError"></span>
+                      </div>
+                    
+
+                      <div class=" ">
+                        <button id="sigin" type="submit" class="btn btn-primary btn-block w-100">Acceder</button>
+                      </div>
+                    
+                </form>
+            </div>
+        </div>
+	</div>
+	
+	<div class="d-flex p-5 mr-5" style="margin-right:100px">
+		
+		<img src="https://www.bancsabadell.com/bsnacional/es/images/6000049427533/gente-hablando.webp" class="img-fluid" alt="...">
+			
+		
+	</div>
+		
+
+	
+	
+	
+	
+	
+	
+	</section>
+  
+  
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

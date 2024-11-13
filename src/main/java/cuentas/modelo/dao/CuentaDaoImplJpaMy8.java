@@ -1,10 +1,12 @@
 package cuentas.modelo.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import cuentas.modelo.entities.Cuenta;
 import cuentas.modelo.repository.CuentaRepository;
 
+@Repository
 public class CuentaDaoImplJpaMy8 implements CuentaDao {
 	
 	

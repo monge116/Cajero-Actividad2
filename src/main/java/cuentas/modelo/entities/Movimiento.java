@@ -25,10 +25,9 @@ public class Movimiento implements Serializable {/**
 	@Id
 	private int idMovimiento;
     @Column(name = "id_cuenta") 
-	private long idCuenta;
 	private Date fecha;
 	private double cantidad;
 	private String operacion;
-
+	private Cuenta cuenta;
 	
 }
