@@ -6,6 +6,8 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,10 +26,13 @@ public class Movimiento implements Serializable {/**
 	@Column(name="id_movimiento")
 	@Id
 	private int idMovimiento;
-    @Column(name = "id_cuenta") 
 	private Date fecha;
 	private double cantidad;
 	private String operacion;
+	
+	
+	@ManyToOne
+    @JoinColumn(name = "id_cuenta")
 	private Cuenta cuenta;
 	
 }

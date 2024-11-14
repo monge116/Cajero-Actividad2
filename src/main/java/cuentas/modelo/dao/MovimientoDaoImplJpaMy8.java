@@ -42,4 +42,11 @@ public class MovimientoDaoImplJpaMy8 implements MovimientoDao{
 		return 0;
 	}
 
+	@Override
+    public List<Movimiento> findByIdCuenta(int idCuenta) {
+        return mrepo.findByIdCuenta(idCuenta);
+    }
+
+	
+
 }
