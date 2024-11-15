@@ -34,4 +34,22 @@ public class Cuenta implements Serializable {
 	
 	
 	
+	public void ingresar(double importe) {
+		saldo+=importe;
+	}
+	public boolean extraer(double importe) {
+		if(importe>saldo) {
+			return false;
+		}
+		saldo-=importe;
+		return true;
+	}
+	public boolean transferir(Cuenta cuentaDestino , double importe) {
+		if(this.extraer(importe)) {
+			cuentaDestino.ingresar(importe);
+			return true;
+		}
+		return false;
+	}
+	
 }

@@ -11,4 +11,6 @@ import cuentas.modelo.entities.Movimiento;
 public interface MovimientoRepository extends JpaRepository<Movimiento, Integer>{
 	@Query(value = "SELECT * FROM movimientos WHERE id_cuenta = ?1 ORDER BY fecha DESC LIMIT 3", nativeQuery = true)
 	public List<Movimiento> findByIdCuenta(int IdCuenta);
+	@Query(value = "SELECT * FROM movimientos WHERE id_cuenta = ?1 ORDER BY fecha DESC", nativeQuery = true)
+	public List<Movimiento> findByIdAllCuenta(int IdCuenta);
 }

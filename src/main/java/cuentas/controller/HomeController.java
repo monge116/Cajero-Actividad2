@@ -50,7 +50,11 @@ public class HomeController {
 	}
 	
 	@GetMapping({"/", "", "/home"})
-	public String home(Model model) {
+	public String home(HttpSession sesion, Model model) {
+		sesion.removeAttribute("cuenta");
+		sesion.getId();
+		sesion.invalidate();
+	
 		return "home";
 	}
 	
@@ -69,6 +73,7 @@ public class HomeController {
 	       
 	        model.addAttribute("movimientos", movimientos);
 	        model.addAttribute("cuenta", cuenta);
+	        model.addAttribute("verMas", true);
 	        
 	        return "cuenta";
 	    } else {
@@ -78,13 +83,65 @@ public class HomeController {
 		
 	}
 	
-	@GetMapping("/cerrarSesion")
-	public String cerrarSesion (HttpSession sesion) {
-		sesion.removeAttribute("cuenta");
-		sesion.getId();
-		sesion.invalidate();
-		return "forward:/";
+	@GetMapping("/verMas")
+	public String mostrarMasMov(HttpSession sesion, Model model) {
+		Cuenta cuenta = (Cuenta) sesion.getAttribute("cuenta");
+		if (cuenta != null) {
+	
+	        List<Movimiento> movimientos = mdao.findByAllIdCuenta(cuenta.getIdCuenta());
+	        
+	       
+	        model.addAttribute("movimientos", movimientos);
+	        model.addAttribute("cuenta", cuenta);
+	        model.addAttribute("verMas", false);
+	        
+	        return "cuenta";
+	    } else {
+	        
+	        return "redirect:/login";
+	    }
+		
 	}
+	
+	@PostMapping("/extraer")
+	public String extraer (HttpSession sesion, Model model, @RequestParam double cantidad, RedirectAttributes ratt) {
+		Cuenta cuenta = (Cuenta) sesion.getAttribute("cuenta");
+		
+		
+		
+		if(cuenta.extraer(cantidad)) {
+			
+		    cdao.updateOne(cuenta);
+		    
+		    Movimiento movimiento= new Movimiento();
+			movimiento.setCuenta(cuenta);
+			movimiento.setCantidad(cantidad);
+			movimiento.setFecha(new java.util.Date());
+			movimiento.setOperacion("Retiro");
+			
+			mdao.insertOne(movimiento);
+			
+			
+		    
+		    
+		}else {
+			ratt.addFlashAttribute("error", "Fondos insuficientes.");
+	        
+		}
+		
+		
+        model.addAttribute("cuenta", cuenta);
+		return "redirect:/cuenta";
+		
+	}
+	
+	//@GetMapping("/")
+	//public String cerrarSesion (HttpSession sesion) {
+		//sesion.removeAttribute("cuenta");
+		//sesion.getId();
+		//sesion.invalidate();
+		//return "forward:/";
+	//}
 	
 	
 	

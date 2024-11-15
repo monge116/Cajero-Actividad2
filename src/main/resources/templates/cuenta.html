@@ -24,7 +24,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	</a>
 	
 	<div class="col-md-3 text-end">
-        <button  type="button" class=" shadow p-2 bg-body rounded"> <a th:href="@{/cerrarSesion}" style="text-decoration:none; color: black"> Cerrar sesión</a>  </button>
+        <button  type="button" class=" shadow p-2 bg-body rounded"> <a th:href="@{/}" style="text-decoration:none; color: black"> Cerrar sesión</a>  </button>
       </div>      
     </header>
     
@@ -84,14 +84,48 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 </TABLE>
 		
 	
-			<a href="">Ver mas</a>	
-			<a href="">Extraer</a>
-			<a href="">Ingresar</a>
+			<a href="/verMas" th:if="${verMas}">
+        		<span id="verMas">Ver más</span>
+   			</a>
+    		<a href="/cuenta" th:if="${!verMas}">
+        		<span id="verMenos">Ver menos</span>
+    		</a> 
+    		
+			<a href=""  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Extraer</a>
+			<a href="" >Ingresar</a>
 			<a href="">Transferir</a>	
 			
 		
 	</div>
 		
+	
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <form th:action="@{/extraer}" method="post" class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Extraer</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+
+	       	<div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><div><i class="fas fa-dollar"></i></div></span>
+                        </div>
+                        <input required name="cantidad" type="number" class="form-control" placeholder="Cantidad" min="0" aria-describedby="basic-addon1">
+                        <span class="text-danger" id="siginUserError"></span>
+            </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button  type="submit" class="btn btn-primary">Confirmar</button>
+	      </div>
+	    </form>
+	  </div>
+	</div>
 
 	
 	
