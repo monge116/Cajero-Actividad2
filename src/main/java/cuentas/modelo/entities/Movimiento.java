@@ -5,6 +5,8 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -24,6 +26,7 @@ public class Movimiento implements Serializable {/**
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="id_movimiento")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private int idMovimiento;
 	private Date fecha;

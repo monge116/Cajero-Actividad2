@@ -135,6 +135,70 @@ public class HomeController {
 		
 	}
 	
+	@PostMapping("/ingresar")
+	public String ingresar (HttpSession sesion, Model model, @RequestParam double cantidad, RedirectAttributes ratt) {
+		Cuenta cuenta = (Cuenta) sesion.getAttribute("cuenta");
+		
+		
+		
+		cuenta.ingresar(cantidad);
+			
+		    cdao.updateOne(cuenta);
+		    
+		    Movimiento movimiento= new Movimiento();
+			movimiento.setCuenta(cuenta);
+			movimiento.setCantidad(cantidad);
+			movimiento.setFecha(new java.util.Date());
+			movimiento.setOperacion("Ingreso");
+			
+			mdao.insertOne(movimiento);
+
+        model.addAttribute("cuenta", cuenta);
+		return "redirect:/cuenta";
+		
+	}
+	
+	@PostMapping("/transferir")
+	public String transferir (HttpSession sesion, Model model, @RequestParam double cantidad, @RequestParam int idCuentaDest, RedirectAttributes ratt) {
+		Cuenta cuenta = (Cuenta) sesion.getAttribute("cuenta");
+		Cuenta destinatario = cdao.findById(idCuentaDest);
+		
+		
+		if (cuenta.transferir(destinatario, cantidad)) {
+			
+			cdao.updateOne(cuenta);
+			cdao.updateOne(destinatario);
+			
+			Movimiento movimiento= new Movimiento();
+			movimiento.setCuenta(cuenta);
+			movimiento.setCantidad(cantidad);
+			movimiento.setFecha(new java.util.Date());
+			movimiento.setOperacion("Retiro");
+			
+			mdao.insertOne(movimiento);
+			
+			Movimiento movimientoDestinatario= new Movimiento();
+			movimientoDestinatario.setCuenta(destinatario);
+			movimientoDestinatario.setCantidad(cantidad);
+			movimientoDestinatario.setFecha(new java.util.Date());
+			movimientoDestinatario.setOperacion("Ingreso");
+			
+			mdao.insertOne(movimientoDestinatario);
+		}else {
+			ratt.addFlashAttribute("error", "Fondos insuficientes.");
+	        
+		};
+			
+		    
+		    
+		    
+
+        model.addAttribute("cuenta", cuenta);
+        
+		return "redirect:/cuenta";
+		
+	}
+	
 	//@GetMapping("/")
 	//public String cerrarSesion (HttpSession sesion) {
 		//sesion.removeAttribute("cuenta");

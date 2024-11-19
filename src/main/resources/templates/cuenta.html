@@ -91,9 +91,9 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
         		<span id="verMenos">Ver menos</span>
     		</a> 
     		
-			<a href=""  type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Extraer</a>
-			<a href="" >Ingresar</a>
-			<a href="">Transferir</a>	
+			<a href=""  type="button"  data-bs-toggle="modal" data-bs-target="#extraer">Extraer</a>
+			<a href="" type="button"  data-bs-toggle="modal" data-bs-target="#ingresar">Ingresar</a>
+			<a href="" type="button"  data-bs-toggle="modal" data-bs-target="#transferir">Transferir</a>	
 			
 		
 	</div>
@@ -101,8 +101,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	
 	
 	
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<!-- Extraer -->
+	<div class="modal fade" id="extraer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <form th:action="@{/extraer}" method="post" class="modal-content">
 	      <div class="modal-header">
@@ -111,6 +111,65 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	      </div>
 	      <div class="modal-body">
 
+	       	<div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><div><i class="fas fa-dollar"></i></div></span>
+                        </div>
+                        <input required name="cantidad" type="number" class="form-control" placeholder="Cantidad" min="0" aria-describedby="basic-addon1">
+                        <span class="text-danger" id="siginUserError"></span>
+            </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button  type="submit" class="btn btn-primary">Confirmar</button>
+	      </div>
+	    </form>
+	  </div>
+	</div>
+	
+	<!-- Ingresar -->
+	<div class="modal fade" id="ingresar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <form th:action="@{/ingresar}" method="post" class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresar</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+
+	       	<div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><div><i class="fas fa-dollar"></i></div></span>
+                        </div>
+                        <input required name="cantidad" type="number" class="form-control" placeholder="Cantidad" min="0" aria-describedby="basic-addon1">
+                        <span class="text-danger" id="siginUserError"></span>
+            </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button  type="submit" class="btn btn-primary">Confirmar</button>
+	      </div>
+	    </form>
+	  </div>
+	</div>
+	
+	<!-- Transferir -->
+	<div class="modal fade" id="transferir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <form th:action="@{/transferir}" method="post" class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Transferir</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      
+			<div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><div><i class="fas fa-user"></i></div></span>
+                        </div>
+                        <input required name="idCuentaDest" type="number" class="form-control" placeholder="Número cuenta destinatario" min="0" aria-describedby="basic-addon1">
+                        <span class="text-danger" id="siginUserError"></span>
+            </div>
 	       	<div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><div><i class="fas fa-dollar"></i></div></span>
