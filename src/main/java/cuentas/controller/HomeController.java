@@ -163,39 +163,43 @@ public class HomeController {
 		Cuenta cuenta = (Cuenta) sesion.getAttribute("cuenta");
 		Cuenta destinatario = cdao.findById(idCuentaDest);
 		
-		
-		if (cuenta.transferir(destinatario, cantidad)) {
+		if (destinatario!=null) {
+			if (cuenta.transferir(destinatario, cantidad)) {
+				
+				cdao.updateOne(cuenta);
+				cdao.updateOne(destinatario);
+				
+				Movimiento movimiento= new Movimiento();
+				movimiento.setCuenta(cuenta);
+				movimiento.setCantidad(cantidad);
+				movimiento.setFecha(new java.util.Date());
+				movimiento.setOperacion("Retiro");
+				
+				mdao.insertOne(movimiento);
+				
+				Movimiento movimientoDestinatario= new Movimiento();
+				movimientoDestinatario.setCuenta(destinatario);
+				movimientoDestinatario.setCantidad(cantidad);
+				movimientoDestinatario.setFecha(new java.util.Date());
+				movimientoDestinatario.setOperacion("Ingreso");
+				
+				mdao.insertOne(movimientoDestinatario);
+				
+				
+			}else {
+				ratt.addFlashAttribute("error", "Fondos insuficientes.");
+		        
+				
+			}
 			
-			cdao.updateOne(cuenta);
-			cdao.updateOne(destinatario);
-			
-			Movimiento movimiento= new Movimiento();
-			movimiento.setCuenta(cuenta);
-			movimiento.setCantidad(cantidad);
-			movimiento.setFecha(new java.util.Date());
-			movimiento.setOperacion("Retiro");
-			
-			mdao.insertOne(movimiento);
-			
-			Movimiento movimientoDestinatario= new Movimiento();
-			movimientoDestinatario.setCuenta(destinatario);
-			movimientoDestinatario.setCantidad(cantidad);
-			movimientoDestinatario.setFecha(new java.util.Date());
-			movimientoDestinatario.setOperacion("Ingreso");
-			
-			mdao.insertOne(movimientoDestinatario);
 		}else {
-			ratt.addFlashAttribute("error", "Fondos insuficientes.");
-	        
-		};
+			ratt.addFlashAttribute("error", "No existe destinatario.");
 			
-		    
-		    
-		    
-
+		}
+		
         model.addAttribute("cuenta", cuenta);
         
-		return "redirect:/cuenta";
+        return "redirect:/cuenta";
 		
 	}
 	
