@@ -58,10 +58,10 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                           <span class="input-group-text" id="basic-addon1"><div><i class="fas fa-lock"></i></div></span>
                         </div>
                         <input required name="idCuenta" type="text" class="form-control" placeholder="Pin" aria-label="Username" aria-describedby="basic-addon1">
-                        <span class="text-danger" id="siginUserError"></span>
+                        
                       </div>
-                    
-
+                    <span class="text-danger" th:text="${error}"></span>
+	
                       <div class=" ">
                         <button id="sigin" type="submit" class="btn btn-primary btn-block w-100">Acceder</button>
                       </div>

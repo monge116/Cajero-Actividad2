@@ -43,7 +43,7 @@ public class HomeController {
 			// ratt.addFlashAttribute("usuario2", usuario.getNombre());
 			return "redirect:/cuenta";
 		}else {
-			ratt.addFlashAttribute("mensaje", "usuario p password incorecto");
+			ratt.addFlashAttribute("error", "Codigo de cuenta incorrecto.");
 			return "redirect:/login";
 		}
 		
