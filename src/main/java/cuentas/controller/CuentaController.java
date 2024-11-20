@@ -27,8 +27,10 @@ public class CuentaController {
 	private MovimientoDao mdao;
 	
 	@GetMapping("/login")
-	public String mostrarLogin() {
+	public String mostrarLogin(HttpSession sesion) {
+		
 		return "login";
+		
 	}
 	
 	@PostMapping("/login")
@@ -154,8 +156,8 @@ public class CuentaController {
 		Cuenta cuenta = (Cuenta) sesion.getAttribute("cuenta");
 		Cuenta destinatario = cdao.findById(idCuentaDest);
 		
-		if (destinatario!=null) {
-			if (cuenta.transferir(destinatario, cantidad)) {
+		if (destinatario!=null && cuenta.getIdCuenta()!=idCuentaDest) {
+			if (cuenta.transferir(destinatario, cantidad )) {
 				
 				cdao.updateOne(cuenta);
 				cdao.updateOne(destinatario);
@@ -184,7 +186,7 @@ public class CuentaController {
 			}
 			
 		}else {
-			ratt.addFlashAttribute("error", "No existe destinatario.");
+			ratt.addFlashAttribute("error", "Destinatario no valido.");
 			
 		}
 		

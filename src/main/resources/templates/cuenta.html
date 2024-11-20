@@ -14,7 +14,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 <body>
 	<div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom sticky-top bg-white">
-      <a  href="/" class="d-flex col-md-3  text-dark text-decoration-none">
+      <a  href="/cuenta" class="d-flex col-md-3  text-dark text-decoration-none">
   		<i class="fa-solid fa-building-columns fa-3x mx-3"></i>
   		<h1 style="font-family: Roboto Slab;
  					font-optical-sizing: auto;
@@ -76,7 +76,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 		<TR th:each="ele: ${movimientos}">
 			
 			<TD th:text="${ele.fecha}"></TD> 
-			<TD th:text="${ele.cantidad}"></TD> 
+			<TD th:text="${ele.operacion == 'Retiro' ? '-' + ele.cantidad : '+' + ele.cantidad}"></TD> 
 			<TD th:text="${ele.operacion}"></TD> 
 		</TR>
 	</tbody>
